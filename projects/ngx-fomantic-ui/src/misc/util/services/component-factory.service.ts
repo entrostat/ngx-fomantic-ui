@@ -5,7 +5,6 @@ import {
   Injectable,
   Injector,
   Provider,
-  ReflectiveInjector,
   TemplateRef,
   Type,
   ViewContainerRef
@@ -17,28 +16,33 @@ export interface IImplicitContext<T> {
 
 @Injectable()
 export class FuiComponentFactory {
-  constructor(private _applicationRef: ApplicationRef,
-              private _componentFactoryResolver: ComponentFactoryResolver,
-              private _injector: Injector) {
-  }
+  constructor(
+    private _applicationRef: ApplicationRef,
+    private _componentFactoryResolver: ComponentFactoryResolver,
+    private _injector: Injector
+  ) {}
 
   public createComponent<T>(type: Type<T>, providers: Provider[] = []): ComponentRef<T> {
     // Resolve a factory for creating components of type `type`.
     const factory = this._componentFactoryResolver.resolveComponentFactory(type as Type<T>);
 
-    // Resolve and create an injector with the specified providers.
-    const injector = ReflectiveInjector.resolveAndCreate(
+    // Create a new injector using the current injector as parent.
+    const injector = Injector.create({
       providers,
-      this._injector
-    );
+      parent: this._injector
+    });
 
-    // Create a component using the previously resolved factory & injector.
+    // Create the component using the factory and the newly created injector.
     const componentRef = factory.create(injector);
 
     return componentRef;
   }
 
-  public createView<T, U extends IImplicitContext<T>>(viewContainer: ViewContainerRef, template: TemplateRef<U>, context: U): void {
+  public createView<T, U extends IImplicitContext<T>>(
+    viewContainer: ViewContainerRef,
+    template: TemplateRef<U>,
+    context: U
+  ): void {
     viewContainer.createEmbeddedView<U>(template, context);
   }
 
