@@ -3,4 +3,4 @@ export * from './collections/public';
 export * from './modules/public';
 
 export * from './misc/public';
-export {FomanticUIModule} from './index';
+export {FomanticUIModule} from './internal-index';

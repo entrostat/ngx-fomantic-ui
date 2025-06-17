@@ -1,4 +1,4 @@
-import { Input, QueryList, ViewChildren, AfterViewInit, Renderer2, OnDestroy } from "@angular/core";
+import { Input, QueryList, ViewChildren, AfterViewInit, Renderer2, OnDestroy, Directive } from '@angular/core';
 import { KeyCode } from "../../../misc/util/internal";
 import { CalendarItem, FuiCalendarItem } from "../directives/calendar-item";
 import { CalendarService } from "../services/calendar.service";
@@ -13,6 +13,7 @@ export enum CalendarViewType {
 }
 export type CalendarViewResult = [Date, CalendarViewType];
 
+@Directive()
 export abstract class CalendarView implements AfterViewInit, OnDestroy {
     private _type:CalendarViewType;
     private _service:CalendarService;
@@ -22,23 +23,23 @@ export abstract class CalendarView implements AfterViewInit, OnDestroy {
     private _highlightedItem?:CalendarItem;
 
     @Input()
-    public set service(service:CalendarService) {
-        this._service = service;
-        this.ranges.loadService(service);
+    public set service(service: CalendarService) {
+      this._service = service;
+      this.ranges.loadService(service);
 
-        this.service.onManualUpdate = () => {
-            this.ranges.refresh();
-
-            delete this._highlightedItem;
-            this.autoHighlight();
-        };
+      service.onManualUpdate = () => {
+        this.ranges.refresh();
+        delete this._highlightedItem;
+        this.autoHighlight();
+      };
     }
 
-    public get service():CalendarService {
-        return this._service;
+    public get service(): CalendarService {
+      return this._service;
     }
 
-    public ranges:CalendarRangeService;
+
+  public ranges:CalendarRangeService;
 
     public get currentDate():Date {
         return this.service.currentDate;

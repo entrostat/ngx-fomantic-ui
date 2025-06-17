@@ -1,5 +1,5 @@
 import {Component, HostBinding, HostListener} from '@angular/core';
-import {CalendarService} from './../services/calendar.service';
+import {CalendarService} from '../services/calendar.service';
 import {DatetimeConfig} from '../classes/calendar-config';
 import {FuiLocalizationService} from '../../../behaviors/localization/internal';
 
