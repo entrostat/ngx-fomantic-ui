@@ -28,7 +28,7 @@ export class CustomValueAccessor<U, T extends ICustomValueAccessorHost<U>> imple
 }
 
 export interface IValueAccessorProvider {
-  provide: InjectionToken<ControlValueAccessor>;
+  provide: typeof NG_VALUE_ACCESSOR;
   useExisting: Type<any>;
   multi: boolean;
 }

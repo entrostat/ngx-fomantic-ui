@@ -22,7 +22,7 @@ export class CustomValidator<T extends ICustomValidatorHost> implements Validato
 }
 
 export interface IValidationProvider {
-  provide: InjectionToken<(Function | Validator)[]>;
+  provide: typeof NG_VALIDATORS;
   useExisting: Type<any>;
   multi: boolean;
 }
