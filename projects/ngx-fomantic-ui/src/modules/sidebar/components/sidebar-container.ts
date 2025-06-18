@@ -1,16 +1,18 @@
-import {AfterContentInit, Component, ContentChild, HostBinding} from '@angular/core';
-import {SidebarService} from '../services/sidebar.service';
-import {FuiSidebar} from './sidebar';
-import {FuiSidebarSibling} from './sidebar-sibling';
+import { AfterContentInit, Component, ContentChild, HostBinding } from '@angular/core';
+import { SidebarService } from '../services/sidebar.service';
+import { FuiSidebar } from './sidebar';
+import { FuiSidebarSibling } from './sidebar-sibling';
 
 @Component({
   selector: 'fui-sidebar-container',
-  template: `<ng-content></ng-content>`,
+  template: `
+    <ng-content></ng-content>`,
+  standalone: false,
   styles: [`
-:host {
-    display: block;
-}
-`]
+    :host {
+      display: block;
+    }
+  `]
 })
 export class FuiSidebarContainer implements AfterContentInit {
   public service: SidebarService;

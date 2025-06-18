@@ -1,11 +1,13 @@
-import {AfterContentInit, Component, ContentChildren, QueryList} from '@angular/core';
-import {FuiTabHeader} from '../directives/tab-header';
-import {FuiTabContent} from '../directives/tab-content';
-import {Tab} from '../classes/tab';
+import { AfterContentInit, Component, ContentChildren, QueryList } from '@angular/core';
+import { FuiTabHeader } from '../directives/tab-header';
+import { FuiTabContent } from '../directives/tab-content';
+import { Tab } from '../classes/tab';
 
 @Component({
   selector: 'fui-tabset',
-  template: `<ng-content></ng-content>`
+  template: `
+    <ng-content></ng-content>`,
+  standalone: false,
 })
 export class FuiTabset implements AfterContentInit {
 
@@ -103,7 +105,7 @@ export class FuiTabset implements AfterContentInit {
     this.tabs = this.tabs.filter(t => !!this._tabHeaders.find(tH => tH === t.header));
 
     this._tabHeaders
-    // Filter out the loaded headers with attached tab instances.
+      // Filter out the loaded headers with attached tab instances.
       .filter(tH => !this.tabs.find(t => t.header === tH))
       .forEach(tH => {
         const content = this._tabContents.find(tC => tC.id === tH.id);

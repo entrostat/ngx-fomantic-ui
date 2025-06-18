@@ -11,15 +11,16 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {FuiDropdownMenuItem} from '../../dropdown/internal';
-import {HandledEvent} from '../../../misc/util/internal';
+import { FuiDropdownMenuItem } from '../../dropdown/internal';
+import { HandledEvent } from '../../../misc/util/internal';
 
 @Component({
   selector: 'fui-select-option',
   template: `
-<span #templateSibling></span>
-<span [innerHTML]="renderedText"></span>
-`
+    <span #templateSibling></span>
+    <span [innerHTML]="renderedText"></span>
+  `,
+  standalone: false,
 })
 export class FuiSelectOption<T> extends FuiDropdownMenuItem {
   // Sets the Fomantic UI classes on the host element.
@@ -39,7 +40,7 @@ export class FuiSelectOption<T> extends FuiDropdownMenuItem {
   public renderedText?: string;
   public usesTemplate: boolean;
   // Placeholder to draw template beside.
-  @ViewChild('templateSibling', { read: ViewContainerRef })
+  @ViewChild('templateSibling', {read: ViewContainerRef})
   public templateSibling: ViewContainerRef;
 
   constructor(renderer: Renderer2, element: ElementRef, public changeDetector: ChangeDetectorRef) {

@@ -1,15 +1,16 @@
-import {Component, ElementRef, HostBinding, HostListener, Input, Renderer2} from '@angular/core';
-import {SidebarService, SidebarTransition} from '../services/sidebar.service';
+import { Component, ElementRef, HostBinding, HostListener, Input, Renderer2 } from '@angular/core';
+import { SidebarService, SidebarTransition } from '../services/sidebar.service';
 
 @Component({
   selector: 'fui-sidebar-sibling',
   template: `
-                   <ng-content></ng-content>`,
+    <ng-content></ng-content>`,
+  standalone: false,
   styles: [`
-                   :host {
-                       display: block;
-                   }
-               `]
+    :host {
+      display: block;
+    }
+  `]
 })
 export class FuiSidebarSibling {
 

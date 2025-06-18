@@ -14,13 +14,14 @@ import {FuiMessageService} from './services/message-service';
         CommonModule,
         FuiTransitionModule,
         FuiProgressModule,
-        FuiUtilityModule
-    ],
-    declarations: [
+        FuiUtilityModule,
+
+        // Components
         FuiMessage,
         FuiMessageContainer,
         FuiMessageGlobalContainer
     ],
+    declarations: [],
     exports: [
         FuiMessage,
         FuiMessageContainer

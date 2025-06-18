@@ -1,6 +1,8 @@
-import {Component, HostListener} from '@angular/core';
-import {MessageController} from '../classes/message-controller';
-import {IDynamicClasses, Util} from '../../../misc/util/internal';
+import { Component, HostListener } from '@angular/core';
+import { MessageController } from '../classes/message-controller';
+import { IDynamicClasses, Util } from '../../../misc/util/internal';
+import { FuiMessageContainer } from './message-container';
+import { NgClass } from '@angular/common';
 
 export type MessagePosition = 'top' | 'top-left' | 'top-right' |
   'bottom' | 'bottom-left' | 'bottom-right';
@@ -16,32 +18,39 @@ export const MessagePosition = {
 
 @Component({
   selector: 'fui-message-global-container',
+  imports: [FuiMessageContainer, NgClass],
   template: `
-<div class="global container" [ngClass]="dynamicClasses" [style.width.px]="dynamicWidth">
-    <fui-message-container [controller]="controller"></fui-message-container>
-</div>
-`,
+    <div class="global container" [ngClass]="dynamicClasses" [style.width.px]="dynamicWidth">
+      <fui-message-container [controller]="controller"></fui-message-container>
+    </div>
+  `,
+  standalone: true,
   styles: [`
-.global.container {
-    display: block;
-    position: fixed;
-}
-.global.container.top {
-    top: 1rem;
-}
-.global.container.bottom {
-    bottom: 1rem;
-}
-.global.container.left {
-    left: 1rem;
-}
-.global.container.right {
-    right: 1rem;
-}
-.global.container:not(.left):not(.right) {
-    left: 1rem;
-}
-`]
+    .global.container {
+      display: block;
+      position: fixed;
+    }
+
+    .global.container.top {
+      top: 1rem;
+    }
+
+    .global.container.bottom {
+      bottom: 1rem;
+    }
+
+    .global.container.left {
+      left: 1rem;
+    }
+
+    .global.container.right {
+      right: 1rem;
+    }
+
+    .global.container:not(.left):not(.right) {
+      left: 1rem;
+    }
+  `]
 })
 export class FuiMessageGlobalContainer {
   public controller: MessageController;

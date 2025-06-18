@@ -1,21 +1,32 @@
-import {Component, Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output, ViewChild} from '@angular/core';
-import {CustomValueAccessor, customValueAccessorFactory, ICustomValueAccessorHost} from '../../../misc/util/internal';
+import {
+  Component,
+  Directive,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+  ViewChild
+} from '@angular/core';
+import { CustomValueAccessor, customValueAccessorFactory, ICustomValueAccessorHost } from '../../../misc/util/internal';
 
 @Component({
   selector: 'fui-checkbox',
   exportAs: 'fuiCheckbox',
   template: `
-<input class="hidden"
-       type="checkbox"
-       [attr.name]="name"
-       [attr.checked]="checkedAttribute"
-       [attr.disabled]="isDisabledAttribute"
-       [(ngModel)]="isChecked"
-       #checkbox>
-<label>
-    <ng-content></ng-content>
-</label>
-`
+    <input class="hidden"
+           type="checkbox"
+           [attr.name]="name"
+           [attr.checked]="checkedAttribute"
+           [attr.disabled]="isDisabledAttribute"
+           [(ngModel)]="isChecked"
+           #checkbox>
+    <label>
+      <ng-content></ng-content>
+    </label>
+  `,
+  standalone: false
 })
 export class FuiCheckbox implements ICustomValueAccessorHost<boolean> {
   @HostBinding('class.ui')
@@ -100,7 +111,8 @@ export class FuiCheckbox implements ICustomValueAccessorHost<boolean> {
     '(checkChange)': 'onChange($event)',
     '(touched)': 'onTouched()'
   },
-  providers: [customValueAccessorFactory(FuiCheckboxValueAccessor)]
+  providers: [customValueAccessorFactory(FuiCheckboxValueAccessor)],
+  standalone: false
 })
 export class FuiCheckboxValueAccessor extends CustomValueAccessor<boolean, FuiCheckbox> {
   constructor(host: FuiCheckbox) {

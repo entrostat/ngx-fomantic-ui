@@ -18,7 +18,8 @@ import {CalendarConfig, DateConfig, DatetimeConfig, MonthConfig, TimeConfig, Yea
 
 @Directive({
   selector: '[fuiDatepicker]',
-  providers: [customValidatorFactory(FuiDatepickerDirective)]
+  providers: [customValidatorFactory(FuiDatepickerDirective)],
+  standalone: false
 })
 export class FuiDatepickerDirective
   extends FuiPopupComponentController<FuiDatepicker>
@@ -197,7 +198,8 @@ export class FuiDatepickerDirective
 @Directive({
   selector: '[fuiDatepicker]',
   host: {'(pickerSelectedDateChange)': 'onChange($event)'},
-  providers: [customValueAccessorFactory(FuiDatepickerDirectiveValueAccessor)]
+  providers: [customValueAccessorFactory(FuiDatepickerDirectiveValueAccessor)],
+  standalone: false
 })
 export class FuiDatepickerDirectiveValueAccessor extends CustomValueAccessor<Date, FuiDatepickerDirective> {
   constructor(public host: FuiDatepickerDirective) {
@@ -208,7 +210,8 @@ export class FuiDatepickerDirectiveValueAccessor extends CustomValueAccessor<Dat
 @Directive({
   selector: '[fuiDatepicker]',
   host: {'(pickerValidatorChange)': 'onValidatorChange()'},
-  providers: [customValidatorFactory(FuiDatepickerDirectiveValidator)]
+  providers: [customValidatorFactory(FuiDatepickerDirectiveValidator)],
+  standalone: false
 })
 export class FuiDatepickerDirectiveValidator extends CustomValidator<FuiDatepickerDirective> {
   constructor(public host: FuiDatepickerDirective) {

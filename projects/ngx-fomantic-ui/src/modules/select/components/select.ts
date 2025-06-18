@@ -1,68 +1,83 @@
-import {Component, Directive, ElementRef, EventEmitter, Input, Output, ViewChild, ViewContainerRef} from '@angular/core';
-import {CustomValueAccessor, customValueAccessorFactory, HandledEvent, ICustomValueAccessorHost} from '../../../misc/util/internal';
-import {FuiLocalizationService} from '../../../behaviors/localization/internal';
-import {FuiSelectBase} from '../classes/select-base';
-import {FuiSelectOption} from './select-option';
+import {
+  Component,
+  Directive,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
+import {
+  CustomValueAccessor,
+  customValueAccessorFactory,
+  HandledEvent,
+  ICustomValueAccessorHost
+} from '../../../misc/util/internal';
+import { FuiLocalizationService } from '../../../behaviors/localization/internal';
+import { FuiSelectBase } from '../classes/select-base';
+import { FuiSelectOption } from './select-option';
 
 @Component({
   selector: 'fui-select',
   template: `
-                   <!-- Query input -->
-                   <input fuiSelectSearch
-                          type="text"
-                          [hidden]="!isSearchable || isSearchExternal">
+    <!-- Query input -->
+    <input fuiSelectSearch
+           type="text"
+           [hidden]="!isSearchable || isSearchExternal">
 
-                   <!-- Placeholder text -->
-                   <div *ngIf="selectedOption == undefined" class="default text" [class.filtered]="query">{{ placeholder }}</div>
-                   <!-- Selected item -->
-                   <div class="text" [class.filtered]="query || selectedOption == undefined">
-                       <span #optionTemplateSibling></span>
-                       <span *ngIf="!optionTemplate && selectedOption != undefined"
-                             [innerHTML]="configuredFormatter(selectedOption)"></span>
-                   </div>
-                   <!-- Dropdown icon -->
-                   <i *ngIf="selectedOption && !isSearching && isClearable" class="times icon"
-                      (click)="onRemoveClick($event)"></i>
-                   <i *ngIf="!selectedOption || !isClearable" class="{{ icon }} icon" (click)="onCaretClick($event)"></i>
-                   <!-- Select dropdown menu -->
-                   <div class="menu"
-                        fuiDropdownMenu
-                        [menuTransition]="transition"
-                        [menuTransitionDuration]="transitionDuration"
-                        [menuAutoSelectFirst]="isSearchable">
+    <!-- Placeholder text -->
+    <div *ngIf="selectedOption == undefined" class="default text" [class.filtered]="query">{{ placeholder }}</div>
+    <!-- Selected item -->
+    <div class="text" [class.filtered]="query || selectedOption == undefined">
+      <span #optionTemplateSibling></span>
+      <span *ngIf="!optionTemplate && selectedOption != undefined"
+            [innerHTML]="configuredFormatter(selectedOption)"></span>
+    </div>
+    <!-- Dropdown icon -->
+    <i *ngIf="selectedOption && !isSearching && isClearable" class="times icon"
+       (click)="onRemoveClick($event)"></i>
+    <i *ngIf="!selectedOption || !isClearable" class="{{ icon }} icon" (click)="onCaretClick($event)"></i>
+    <!-- Select dropdown menu -->
+    <div class="menu"
+         fuiDropdownMenu
+         [menuTransition]="transition"
+         [menuTransitionDuration]="transitionDuration"
+         [menuAutoSelectFirst]="isSearchable">
 
-                       <ng-content></ng-content>
-                       <div *ngIf="isSearchable && availableOptions.length === 0" class="message">
-                           {{ localeValues.noResultsMessage }}
-                       </div>
-                   </div>
-               `,
+      <ng-content></ng-content>
+      <div *ngIf="isSearchable && availableOptions.length === 0" class="message">
+        {{ localeValues.noResultsMessage }}
+      </div>
+    </div>
+  `,
+  standalone: false,
   styles: [`
-                   :host .times.icon {
-                       position: absolute;
-                       width: auto;
-                       height: auto;
-                       line-height: 1.21428571em;
-                       top: .78571429em;
-                       right: 1em;
-                       margin: -.78571429em;
-                       opacity: .6;
-                       font-size: 1.07142857em;
-                       padding: .6em;
-                       -webkit-transition: opacity .1s ease;
-                       transition: opacity .1s ease;
-                       z-index: 3;
-                   }
+    :host .times.icon {
+      position: absolute;
+      width: auto;
+      height: auto;
+      line-height: 1.21428571em;
+      top: .78571429em;
+      right: 1em;
+      margin: -.78571429em;
+      opacity: .6;
+      font-size: 1.07142857em;
+      padding: .6em;
+      -webkit-transition: opacity .1s ease;
+      transition: opacity .1s ease;
+      z-index: 3;
+    }
 
-                   :host .times.icon.larger {
-                       padding: .91666667em;
-                       font-size: .85714286em;
-                   }
+    :host .times.icon.larger {
+      padding: .91666667em;
+      font-size: .85714286em;
+    }
 
-                   :host .times.icon:hover {
-                       opacity: 1;
-                   }
-               `]
+    :host .times.icon:hover {
+      opacity: 1;
+    }
+  `]
 })
 export class FuiSelect<T, U> extends FuiSelectBase<T, U> implements ICustomValueAccessorHost<U> {
 
@@ -190,7 +205,8 @@ export class FuiSelect<T, U> extends FuiSelectBase<T, U> implements ICustomValue
     '(selectedOptionChange)': 'onChange($event)',
     '(touched)': 'onTouched()'
   },
-  providers: [customValueAccessorFactory(FuiSelectValueAccessor)]
+  providers: [customValueAccessorFactory(FuiSelectValueAccessor)],
+  standalone: false
 })
 export class FuiSelectValueAccessor<T, U> extends CustomValueAccessor<U, FuiSelect<T, U>> {
   constructor(host: FuiSelect<T, U>) {

@@ -46,7 +46,7 @@ See the [Documentation](https://ngx-fomantic-ui.github.io/ngx-fomantic-ui) for i
 
 ## Component Support
 
-|           Icon          |                                      Description                                    |
+| Icon                    | Description                                                                         |
 |-------------------------|-------------------------------------------------------------------------------------|
 | :white_check_mark:      | Component supported by ngx-fomantic-ui.                                             |
 | :rocket:                | Fomantic UI plugin supported by ngx-fomantic-ui (not in Fomantic UI Core).          |
@@ -54,58 +54,63 @@ See the [Documentation](https://ngx-fomantic-ui.github.io/ngx-fomantic-ui) for i
 | :x:                     | Component currently unavailable.                                                    |
 | :no_entry_sign:         | Component not applicable to Angular.                                                |
 
-|              Elements              |            Collections             |                   Views                  |              Modules              |              Behaviors              |
-|------------------------------------|------------------------------------|------------------------------------------|-----------------------------------|-------------------------------------|
-| :ballot_box_with_check: Button     | :ballot_box_with_check: Breadcrumb | :ballot_box_with_check: Advertisment     | :white_check_mark: Accordion      | :no_entry_sign: API                 |
-| :ballot_box_with_check: Container  | :ballot_box_with_check: Form       | :ballot_box_with_check: Card             | :white_check_mark: Checkbox       | :no_entry_sign: Form Validation     |
-| :ballot_box_with_check: Divider    | :ballot_box_with_check: Grid       | :ballot_box_with_check: Comment          | :rocket: Collapse                 | :rocket: Localization               |
-| :ballot_box_with_check: Flag       | :ballot_box_with_check: Menu       | :ballot_box_with_check: Feed             | :rocket: Datepicker               | :x: Visibiltiy                      |
-| :ballot_box_with_check: Header     | :white_check_mark: Message         | :ballot_box_with_check: Item             | :white_check_mark: Dimmer         |                                     |
-| :ballot_box_with_check: Icon       | :rocket: Pagination                | :ballot_box_with_check: Statistic        | :white_check_mark: Dropdown       |                                     |
-| :ballot_box_with_check: Image      | :ballot_box_with_check: Table      |                                          | :x: Embed                         |                                     |
-| :ballot_box_with_check: Input      |                                    |                                          | :white_check_mark: Modal          |                                     |
-| :ballot_box_with_check: Label      |                                    |                                          | :white_check_mark: Popup          |                                     |
-| :ballot_box_with_check: List       |                                    |                                          | :white_check_mark: Progress       |                                     |
-| :ballot_box_with_check: Loader     |                                    |                                          | :white_check_mark: Rating         |                                     |
-| :ballot_box_with_check: Rail       |                                    |                                          | :white_check_mark: Search         |                                     |
-| :ballot_box_with_check: Reveal     |                                    |                                          | :x: Shape                         |                                     |
-| :ballot_box_with_check: Segment    |                                    |                                          | :white_check_mark: Sidebar        |                                     |
-| :ballot_box_with_check: Step       |                                    |                                          | :x: Sticky                        |                                     |
-|                                    |                                    |                                          | :white_check_mark: Tab            |                                     |
-|                                    |                                    |                                          | :white_check_mark: Toast          |                                     |
-|                                    |                                    |                                          | :white_check_mark: Transition     |                                     |
+| Elements                          | Collections                        | Views                                | Modules                       | Behaviors                       |
+|-----------------------------------|------------------------------------|--------------------------------------|-------------------------------|---------------------------------|
+| :ballot_box_with_check: Button    | :ballot_box_with_check: Breadcrumb | :ballot_box_with_check: Advertisment | :white_check_mark: Accordion  | :no_entry_sign: API             |
+| :ballot_box_with_check: Container | :ballot_box_with_check: Form       | :ballot_box_with_check: Card         | :white_check_mark: Checkbox   | :no_entry_sign: Form Validation |
+| :ballot_box_with_check: Divider   | :ballot_box_with_check: Grid       | :ballot_box_with_check: Comment      | :rocket: Collapse             | :rocket: Localization           |
+| :ballot_box_with_check: Flag      | :ballot_box_with_check: Menu       | :ballot_box_with_check: Feed         | :rocket: Datepicker           | :x: Visibiltiy                  |
+| :ballot_box_with_check: Header    | :white_check_mark: Message         | :ballot_box_with_check: Item         | :white_check_mark: Dimmer     |                                 |
+| :ballot_box_with_check: Icon      | :rocket: Pagination                | :ballot_box_with_check: Statistic    | :white_check_mark: Dropdown   |                                 |
+| :ballot_box_with_check: Image     | :ballot_box_with_check: Table      |                                      | :x: Embed                     |                                 |
+| :ballot_box_with_check: Input     |                                    |                                      | :white_check_mark: Modal      |                                 |
+| :ballot_box_with_check: Label     |                                    |                                      | :white_check_mark: Popup      |                                 |
+| :ballot_box_with_check: List      |                                    |                                      | :white_check_mark: Progress   |                                 |
+| :ballot_box_with_check: Loader    |                                    |                                      | :white_check_mark: Rating     |                                 |
+| :ballot_box_with_check: Rail      |                                    |                                      | :white_check_mark: Search     |                                 |
+| :ballot_box_with_check: Reveal    |                                    |                                      | :x: Shape                     |                                 |
+| :ballot_box_with_check: Segment   |                                    |                                      | :white_check_mark: Sidebar    |                                 |
+| :ballot_box_with_check: Step      |                                    |                                      | :x: Sticky                    |                                 |
+|                                   |                                    |                                      | :white_check_mark: Tab        |                                 |
+|                                   |                                    |                                      | :white_check_mark: Toast      |                                 |
+|                                   |                                    |                                      | :white_check_mark: Transition |                                 |
 
 ## Development
 
 To generate all library files:
 
 ```bash
-$ npm run lib:compile
+$ yarn run lib:compile
 # use lib:compile:w to watch for changes
 ```
 
 To run the demo app:
+
 ```bash
-$ npm run demo:serve
+$ yarn run demo:serve
 ```
 
 ## Testing
 
 To run the unit tests suite:
+
 ```bash
-$ npm run test
+$ yarn run test
 ```
 
 ## Running Documentation Website on Docker
 
-The ngx-fomantic-ui [website](https://ngx-fomantic-ui.netlify.com/#/getting-started) sample project can run as a docker container. 
+The ngx-fomantic-ui [website](https://ngx-fomantic-ui.netlify.com/#/getting-started) sample project can run as a docker container.
 In order to run the website on docker, use the following commands (**run commands from the repo's root folder**):
+
 * `docker build -t ngx-fomantic-ui-docs:latest .` - building the ngx-fomantic-ui website image
 * `docker run -p <host-port>:4200 ngx-fomantic-ui-docs:latest` - starting the container, listening on *<host-port>* for your choice.
 
 The container will run the documentation app with the script `docker:serve:docs` with 0.0.0.0 host support.
+
 * Saving the image for later offline usage is available by building the container and then using `docker save ngx-fomantic-ui-docs:latest > <tar-name>.tar`
-and loading it afterwards with `sudo docker load < <tar-name>.tar`.
+  and loading it afterwards with `sudo docker load < <tar-name>.tar`.
+
 > tested on ubuntu 18.04.2 with Docker 18.09.6
 
 ## Credits and License

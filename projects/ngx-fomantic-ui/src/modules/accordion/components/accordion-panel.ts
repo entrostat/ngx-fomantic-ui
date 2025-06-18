@@ -1,33 +1,36 @@
-import {ChangeDetectorRef, Component, EventEmitter, Input, Output} from '@angular/core';
-import {FuiAccordionService} from '../services/accordion.service';
-import {Transition, TransitionController} from '../../transition/internal';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import { FuiAccordionService } from '../services/accordion.service';
+import { FuiTransitionModule, Transition, TransitionController } from '../../transition/internal';
+import { FuiCollapseModule } from '../../collapse/internal';
 
 @Component({
   selector: 'fui-accordion-panel',
   exportAs: 'fuiAccordionPanel',
+  imports: [FuiCollapseModule, FuiTransitionModule],
   template: `
-<!-- Title -->
-<div class="title" [class.active]="isOpen" (click)="toggle()" >
-    <ng-content select="[title]"></ng-content>
-</div>
-<!-- Content -->
-<div [fuiCollapse]="!isOpen" [collapseDuration]="transitionDuration">
-    <div class="content" [class.active]="isOpen" [fuiTransition]="transitionController">
-        <ng-content select="[content]"></ng-content>
+    <!-- Title -->
+    <div class="title" [class.active]="isOpen" (click)="toggle()">
+      <ng-content select="[title]"></ng-content>
     </div>
-</div>
-`,
+    <!-- Content -->
+    <div [fuiCollapse]="!isOpen" [collapseDuration]="transitionDuration">
+      <div class="content" [class.active]="isOpen" [fuiTransition]="transitionController">
+        <ng-content select="[content]"></ng-content>
+      </div>
+    </div>
+  `,
+  standalone: true,
   styles: [`
-/* Manual style as Fomantic UI relies on > selector */
-.content {
-    padding: .5em 0 1em;
-}
+    /* Manual style as Fomantic UI relies on > selector */
+    .content {
+      padding: .5em 0 1em;
+    }
 
-/* Another > selector fix */
-:host:first-child .title {
-    border-top: none;
-}
-`]
+    /* Another > selector fix */
+    :host:first-child .title {
+      border-top: none;
+    }
+  `]
 })
 export class FuiAccordionPanel {
 

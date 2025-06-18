@@ -1,9 +1,9 @@
-import {Component, Renderer2} from '@angular/core';
-import {DatePrecision} from '../../../misc/util/internal';
-import {CalendarView, CalendarViewType} from './calendar-view';
-import {CalendarItem} from '../directives/calendar-item';
-import {CalendarRangeService} from '../services/calendar-range.service';
-import {DateParser} from '../classes/date-parser';
+import { Component, Renderer2 } from '@angular/core';
+import { DatePrecision } from '../../../misc/util/internal';
+import { CalendarView, CalendarViewType } from './calendar-view';
+import { CalendarItem } from '../directives/calendar-item';
+import { CalendarRangeService } from '../services/calendar-range.service';
+import { DateParser } from '../classes/date-parser';
 
 export class CalendarRangeHourService extends CalendarRangeService {
   public configureItem(item: CalendarItem, baseDate: Date): void {
@@ -17,27 +17,28 @@ export class CalendarRangeHourService extends CalendarRangeService {
 @Component({
   selector: 'fui-calendar-hour-view',
   template: `
-<table class="ui celled center aligned unstackable table four column hour">
-<thead *ngIf="service.config.mode != 1">
-    <tr>
+    <table class="ui celled center aligned unstackable table four column hour">
+      <thead *ngIf="service.config.mode != 1">
+      <tr>
         <th colspan="4">
-            <fui-calendar-view-title [ranges]="ranges" (zoomOut)="zoomOut()">
-                {{ date }}
-            </fui-calendar-view-title>
+          <fui-calendar-view-title [ranges]="ranges" (zoomOut)="zoomOut()">
+            {{ date }}
+          </fui-calendar-view-title>
         </th>
-    </tr>
-</thead>
-<tbody>
-    <tr *ngFor="let group of ranges.current.groupedItems">
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let group of ranges.current.groupedItems">
         <td class="link"
             *ngFor="let item of group"
             [calendarItem]="item"
             (click)="setDate(item)">{{ item.humanReadable }}
         </td>
-    </tr>
-</tbody>
-</table>
-`
+      </tr>
+      </tbody>
+    </table>
+  `,
+  standalone: false,
 })
 export class FuiCalendarHourView extends CalendarView {
 

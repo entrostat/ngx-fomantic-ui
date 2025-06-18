@@ -1,13 +1,14 @@
-import {Component, HostBinding, Input, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
-import {FuiComponentFactory} from '../../../misc/util/internal';
-import {IResultContext} from './search';
+import { Component, HostBinding, Input, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { FuiComponentFactory } from '../../../misc/util/internal';
+import { IResultContext } from './search';
 
 @Component({
   selector: 'fui-search-result',
   template: `
-<span #templateSibling></span>
-<span *ngIf="!template" [innerHTML]="formatter(value, query)"></span>
-`
+    <span #templateSibling></span>
+    <span *ngIf="!template" [innerHTML]="formatter(value, query)"></span>
+  `,
+  standalone: false,
 })
 export class FuiSearchResult<T> {
 
@@ -22,7 +23,7 @@ export class FuiSearchResult<T> {
   @Input()
   public formatter: (obj: T, query: string) => string;
   // Placeholder to draw template beside.
-  @ViewChild("templateSibling", { read: ViewContainerRef, static: true })
+  @ViewChild('templateSibling', {read: ViewContainerRef, static: true})
   public templateSibling: ViewContainerRef;
 
   constructor(public componentFactory: FuiComponentFactory) {

@@ -1,62 +1,71 @@
-import {Component, ElementRef, EventEmitter, HostBinding, HostListener, ViewChild, ViewContainerRef} from '@angular/core';
-import {IDynamicClasses, PositioningService} from '../../../misc/util/internal';
-import {Transition, TransitionController, TransitionDirection} from '../../transition/internal';
-import {IPopup} from '../classes/popup-controller';
-import {TemplatePopupConfig} from '../classes/popup-template-controller';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
+import { IDynamicClasses, PositioningService } from '../../../misc/util/internal';
+import { Transition, TransitionController, TransitionDirection } from '../../transition/internal';
+import { IPopup } from '../classes/popup-controller';
+import { TemplatePopupConfig } from '../classes/popup-template-controller';
 
 @Component({
   selector: 'fui-popup',
   template: `
-<div class="ui popup"
-     [ngClass]="dynamicClasses"
-     [fuiTransition]="transitionController"
-     [attr.direction]="direction"
-     #container>
+    <div class="ui popup"
+         [ngClass]="dynamicClasses"
+         [fuiTransition]="transitionController"
+         [attr.direction]="direction"
+         #container>
 
-    <ng-container *ngIf="!config.template && (!!config.header || !!config.text)">
+      <ng-container *ngIf="!config.template && (!!config.header || !!config.text)">
         <div class="header" *ngIf="config.header">{{ config.header }}</div>
         <div class="content">{{ config.text }}</div>
-    </ng-container>
-    <div #templateSibling></div>
+      </ng-container>
+      <div #templateSibling></div>
 
-    <fui-popup-arrow *ngIf="!config.isBasic"
-                     [placement]="config.placement"
-                     [inverted]="config.isInverted"></fui-popup-arrow>
-</div>
-`,
+      <fui-popup-arrow *ngIf="!config.isBasic"
+                       [placement]="config.placement"
+                       [inverted]="config.isInverted"></fui-popup-arrow>
+    </div>
+  `,
   styles: [`
-.ui.popup {
-    /* Autofit popup to the contents. */
-    right: auto;
-    margin: 0;
-}
+    .ui.popup {
+      /* Autofit popup to the contents. */
+      right: auto;
+      margin: 0;
+    }
 
-.ui.animating.popup {
-    /* When the popup is animating, it may not initially be in the correct position.
-       This fires a mouse event, causing the anchor's mouseleave to fire - making the popup flicker.
-       Setting pointer-events to none while animating fixes this bug. */
-    pointer-events: none;
-}
+    .ui.animating.popup {
+      /* When the popup is animating, it may not initially be in the correct position.
+         This fires a mouse event, causing the anchor's mouseleave to fire - making the popup flicker.
+         Setting pointer-events to none while animating fixes this bug. */
+      pointer-events: none;
+    }
 
-.ui.popup::before {
-    /* Hide the Fomantic UI CSS arrow. */
-    display: none;
-}
+    .ui.popup::before {
+      /* Hide the Fomantic UI CSS arrow. */
+      display: none;
+    }
 
-/* Offset popup by 0.75em above and below when placed 'vertically'. */
-.ui.popup[direction="top"],
-.ui.popup[direction="bottom"] {
-    margin-top: 0.75em;
-    margin-bottom: 0.75em;
-}
+    /* Offset popup by 0.75em above and below when placed 'vertically'. */
+    .ui.popup[direction="top"],
+    .ui.popup[direction="bottom"] {
+      margin-top: 0.75em;
+      margin-bottom: 0.75em;
+    }
 
-/* Offset popup by 0.75em either side when placed 'horizontally'. */
-.ui.popup[direction="left"],
-.ui.popup[direction="right"] {
-    margin-left: 0.75em;
-    margin-right: 0.75em;
-}
-`]
+    /* Offset popup by 0.75em either side when placed 'horizontally'. */
+    .ui.popup[direction="left"],
+    .ui.popup[direction="right"] {
+      margin-left: 0.75em;
+      margin-right: 0.75em;
+    }
+  `],
+  standalone: false,
 })
 export class FuiPopup implements IPopup {
 
@@ -76,7 +85,7 @@ export class FuiPopup implements IPopup {
   @HostBinding('attr.tabindex')
   public readonly tabindex: number;
   // `ElementRef` for the positioning subject.
-  @ViewChild('container', { read: ViewContainerRef })
+  @ViewChild('container', {read: ViewContainerRef})
   private _container: ViewContainerRef;
 
   constructor(public elementRef: ElementRef) {

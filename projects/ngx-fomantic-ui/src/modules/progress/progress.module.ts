@@ -4,10 +4,10 @@ import {FuiProgress} from './components/progress';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FuiProgress
   ],
   declarations: [
-    FuiProgress
   ],
   exports: [
     FuiProgress

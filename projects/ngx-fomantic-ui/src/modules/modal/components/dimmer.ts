@@ -1,16 +1,18 @@
-import {ChangeDetectorRef, Component, ElementRef, HostBinding, Renderer2} from '@angular/core';
-import {FuiDimmer} from '../../dimmer/internal';
+import { ChangeDetectorRef, Component, ElementRef, HostBinding, Renderer2 } from '@angular/core';
+import { FuiDimmer } from '../../dimmer/internal';
 
 @Component({
   selector: 'fui-modal-dimmer',
-  template: `<ng-content></ng-content>`,
+  template: `
+    <ng-content></ng-content>`,
+  standalone: false,
   styles: [`
-        :host.ui.dimmer:not(.hidden) {
-            transition: none;
-            overflow-y: auto;
-            display: flex !important;
-        }
-    `]
+    :host.ui.dimmer:not(.hidden) {
+      transition: none;
+      overflow-y: auto;
+      display: flex !important;
+    }
+  `]
 })
 export class FuiModalDimmer extends FuiDimmer {
 

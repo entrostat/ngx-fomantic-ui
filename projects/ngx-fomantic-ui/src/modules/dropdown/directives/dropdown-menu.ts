@@ -20,7 +20,8 @@ import 'element-closest';
 
 @Directive({
   // We must attach to every '.item' as Angular doesn't support > selectors.
-  selector: '.item'
+  selector: '.item',
+  standalone: false
 })
 export class FuiDropdownMenuItem {
 
@@ -67,7 +68,8 @@ export class FuiDropdownMenuItem {
 }
 
 @Directive({
-  selector: '[fuiDropdownMenu]'
+  selector: '[fuiDropdownMenu]',
+  standalone: false
 })
 export class FuiDropdownMenu extends FuiTransition implements AfterContentInit, OnDestroy {
 

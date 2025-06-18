@@ -1,61 +1,67 @@
-import {Component, Directive, ElementRef, EventEmitter, HostBinding, Input, Output} from '@angular/core';
-import {CustomValueAccessor, customValueAccessorFactory, ICustomValueAccessorHost, KeyCode} from '../../../misc/util/internal';
-import {FuiLocalizationService} from '../../../behaviors/localization/internal';
-import {FuiSelectBase} from '../classes/select-base';
-import {FuiSelectOption} from './select-option';
+import { Component, Directive, ElementRef, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import {
+  CustomValueAccessor,
+  customValueAccessorFactory,
+  ICustomValueAccessorHost,
+  KeyCode
+} from '../../../misc/util/internal';
+import { FuiLocalizationService } from '../../../behaviors/localization/internal';
+import { FuiSelectBase } from '../classes/select-base';
+import { FuiSelectOption } from './select-option';
 
 @Component({
   selector: 'fui-multi-select',
   template: `
-<!-- Dropdown icon -->
-<i class="{{ icon }} icon" (click)="onCaretClick($event)"></i>
+    <!-- Dropdown icon -->
+    <i class="{{ icon }} icon" (click)="onCaretClick($event)"></i>
 
-<ng-container *ngIf="hasLabels">
-<!-- Multi-select labels -->
-    <fui-multi-select-label *ngFor="let selected of selectedOptions;"
-                            [value]="selected"
-                            [query]="query"
-                            [formatter]="configuredFormatter"
-                            [template]="optionTemplate"
-                            (deselected)="deselectOption($event)"></fui-multi-select-label>
-</ng-container>
+    <ng-container *ngIf="hasLabels">
+      <!-- Multi-select labels -->
+      <fui-multi-select-label *ngFor="let selected of selectedOptions;"
+                              [value]="selected"
+                              [query]="query"
+                              [formatter]="configuredFormatter"
+                              [template]="optionTemplate"
+                              (deselected)="deselectOption($event)"></fui-multi-select-label>
+    </ng-container>
 
-<!-- Query input -->
-<input fuiSelectSearch
-       type="text"
-       [hidden]="!isSearchable || isSearchExternal">
+    <!-- Query input -->
+    <input fuiSelectSearch
+           type="text"
+           [hidden]="!isSearchable || isSearchExternal">
 
-<!-- Helper text -->
-<div class="text"
-     [class.default]="hasLabels"
-     [class.filtered]="!!query && !isSearchExternal">
+    <!-- Helper text -->
+    <div class="text"
+         [class.default]="hasLabels"
+         [class.filtered]="!!query && !isSearchExternal">
 
-    <!-- Placeholder text -->
-    <ng-container *ngIf="hasLabels; else selectedBlock">{{ placeholder }}</ng-container>
+      <!-- Placeholder text -->
+      <ng-container *ngIf="hasLabels; else selectedBlock">{{ placeholder }}</ng-container>
 
-    <!-- Summary shown when labels are hidden -->
-    <ng-template #selectedBlock> {{ selectedMessage }}</ng-template>
-</div>
+      <!-- Summary shown when labels are hidden -->
+      <ng-template #selectedBlock> {{ selectedMessage }}</ng-template>
+    </div>
 
-<!-- Select dropdown menu -->
-<div class="menu"
-     fuiDropdownMenu
-     [menuTransition]="transition"
-     [menuTransitionDuration]="transitionDuration"
-     [menuAutoSelectFirst]="true">
+    <!-- Select dropdown menu -->
+    <div class="menu"
+         fuiDropdownMenu
+         [menuTransition]="transition"
+         [menuTransitionDuration]="transitionDuration"
+         [menuAutoSelectFirst]="true">
 
-    <ng-content></ng-content>
-    <ng-container *ngIf="availableOptions.length == 0 ">
+      <ng-content></ng-content>
+      <ng-container *ngIf="availableOptions.length == 0 ">
         <div *ngIf="!maxSelectedReached" class="message">{{ localeValues.noResultsMessage }}</div>
         <div *ngIf="maxSelectedReached" class="message">{{ maxSelectedMessage }}</div>
-    </ng-container>
-</div>
-`,
+      </ng-container>
+    </div>
+  `,
+  standalone: false,
   styles: [`
-:host input.search {
-    width: 12em !important;
-}
-`]
+    :host input.search {
+      width: 12em !important;
+    }
+  `]
 })
 export class FuiMultiSelect<T, U> extends FuiSelectBase<T, U> implements ICustomValueAccessorHost<U[]> {
 
@@ -177,7 +183,7 @@ export class FuiMultiSelect<T, U> extends FuiSelectBase<T, U> implements ICustom
       if (this.searchService.options.length > 0) {
         // If the options have already been loaded, we can immediately match the ngModel values to options.
         this.selectedOptions = values
-        // non-null assertion added here because Typescript doesn't recognise the non-null filter.
+          // non-null assertion added here because Typescript doesn't recognise the non-null filter.
           .map(v => this.findOption(this.searchService.options, v)!)
           .filter(v => v != undefined);
       }
@@ -229,7 +235,7 @@ export class FuiMultiSelect<T, U> extends FuiSelectBase<T, U> implements ICustom
     if (this._writtenOptions && this.searchService.options.length > 0) {
       // If there were values written by ngModel before the options had been loaded, this runs to fix it.
       this.selectedOptions = this._writtenOptions
-      // non-null assertion added here because Typescript doesn't recognise the non-null filter.
+        // non-null assertion added here because Typescript doesn't recognise the non-null filter.
         .map(v => this.findOption(this.searchService.options, v)!)
         .filter(v => v != undefined);
 
@@ -254,7 +260,8 @@ export class FuiMultiSelect<T, U> extends FuiSelectBase<T, U> implements ICustom
     '(selectedOptionsChange)': 'onChange($event)',
     '(touched)': 'onTouched()'
   },
-  providers: [customValueAccessorFactory(FuiMultiSelectValueAccessor)]
+  providers: [customValueAccessorFactory(FuiMultiSelectValueAccessor)],
+  standalone: false
 })
 export class FuiMultiSelectValueAccessor<T, U> extends CustomValueAccessor<U[], FuiMultiSelect<T, U>> {
   constructor(host: FuiMultiSelect<T, U>) {

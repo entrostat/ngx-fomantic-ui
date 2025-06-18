@@ -1,13 +1,14 @@
-import {Component, ContentChild, ElementRef, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FuiToastTitle} from '../directives/toast-title';
-import {FuiToastMessage} from '../directives/toast-message';
+import { Component, ContentChild, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FuiToastTitle } from '../directives/toast-title';
+import { FuiToastMessage } from '../directives/toast-message';
 
 @Component({
   selector: 'fui-toast',
   exportAs: 'fuiToast',
   template: `
     <div class="toast-box compact" (click)="(dismissible ? (!closeIcon ? close() : null) : null)">
-      <div *ngIf="showProgress && showProgress === 'top'" class="ui attached active progress {{class}} {{showProgress}}">
+      <div *ngIf="showProgress && showProgress === 'top'"
+           class="ui attached active progress {{class}} {{showProgress}}">
         <div class="bar" [ngStyle]="{'transition': 'width ' + (displayTime / 1000)  + 's', 'width': progress + '%'}"
              style="width: 100%;"></div>
       </div>
@@ -16,25 +17,27 @@ import {FuiToastMessage} from '../directives/toast-message';
         <i *ngIf="showIcon" class="{{showIcon}} icon"></i>
         <div class="content">
           <ng-container *ngIf="title">
-            <div class="header">{{title}}</div>
+            <div class="header">{{ title }}</div>
           </ng-container>
           <div class="header" *ngIf="titleTpl">
             <ng-template [ngTemplateOutlet]="titleTpl.templateRef"></ng-template>
           </div>
           <ng-container *ngIf="message">
-            <div class="body">{{message}}</div>
+            <div class="body">{{ message }}</div>
           </ng-container>
           <div *ngIf="messageTpl" class="body">
             <ng-template [ngTemplateOutlet]="messageTpl.templateRef"></ng-template>
           </div>
         </div>
       </div>
-      <div *ngIf="showProgress && showProgress === 'bottom'" class="ui attached active progress {{class}} {{showProgress}}">
+      <div *ngIf="showProgress && showProgress === 'bottom'"
+           class="ui attached active progress {{class}} {{showProgress}}">
         <div class="bar" [ngStyle]="{'transition': 'width ' + (displayTime / 1000)  + 's', 'width': progress + '%'}"
              style="width: 100%;"></div>
       </div>
     </div>
-  `
+  `,
+  standalone: false,
 })
 export class FuiToast implements OnInit {
   @Input() dismissible: boolean;

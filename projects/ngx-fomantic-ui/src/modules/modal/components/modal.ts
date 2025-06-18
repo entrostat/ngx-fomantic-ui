@@ -11,32 +11,32 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {IDynamicClasses, KeyCode, FuiComponentFactory, Util} from '../../../misc/util/internal';
-import {Transition, TransitionController, TransitionDirection} from '../../transition/internal';
-import {ModalControls, ModalResult} from '../classes/modal-controls';
-import {ModalConfig, ModalSize} from '../classes/modal-config';
+import { FuiComponentFactory, IDynamicClasses, KeyCode, Util } from '../../../misc/util/internal';
+import { Transition, TransitionController, TransitionDirection } from '../../transition/internal';
+import { ModalControls, ModalResult } from '../classes/modal-controls';
+import { ModalConfig, ModalSize } from '../classes/modal-config';
 
 @Component({
   selector: 'fui-modal',
   template: `
-<!-- Page dimmer for modal background. -->
-<fui-modal-dimmer [ngClass]="{'top aligned': !isCentered}"
-                  [class.inverted]="isInverted"
-                  [(isDimmed)]="dimBackground"
-                  [transitionDuration]="transitionDuration"
-                  (click)="close()">
+    <!-- Page dimmer for modal background. -->
+    <fui-modal-dimmer [ngClass]="{'top aligned': !isCentered}"
+                      [class.inverted]="isInverted"
+                      [(isDimmed)]="dimBackground"
+                      [transitionDuration]="transitionDuration"
+                      (click)="close()">
 
-    <!-- Modal component, with transition component attached -->
-    <div class="ui modal"
-         [fuiTransition]="transitionController"
-         [class.active]="transitionController?.isVisible"
-         [class.fullscreen]="isFullScreen"
-         [class.basic]="isBasic"
-         [class.scrolling]="mustScroll"
-         [class.inverted]="isInverted"
-         [ngClass]="dynamicClasses"
-         (click)="onClick($event)"
-         #modal>
+      <!-- Modal component, with transition component attached -->
+      <div class="ui modal"
+           [fuiTransition]="transitionController"
+           [class.active]="transitionController?.isVisible"
+           [class.fullscreen]="isFullScreen"
+           [class.basic]="isBasic"
+           [class.scrolling]="mustScroll"
+           [class.inverted]="isInverted"
+           [ngClass]="dynamicClasses"
+           (click)="onClick($event)"
+           #modal>
 
         <!-- Configurable close icon -->
         <i class="close icon" *ngIf="isClosable" (click)="close()"></i>
@@ -44,10 +44,11 @@ import {ModalConfig, ModalSize} from '../classes/modal-config';
         <ng-content></ng-content>
         <!-- @ViewChild reference so we can insert elements beside this div. -->
         <div #templateSibling></div>
-    </div>
-</fui-modal-dimmer>
-`,
-  styles: [``]
+      </div>
+    </fui-modal-dimmer>
+  `,
+  standalone: false,
+  styles: [``],
 })
 export class FuiModal<T, U> implements OnInit, AfterViewInit {
 

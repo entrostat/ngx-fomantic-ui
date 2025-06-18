@@ -1,19 +1,30 @@
-import {ChangeDetectorRef, Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output, Renderer2} from '@angular/core';
-import {FuiTransition, Transition, TransitionController, TransitionDirection} from '../../transition/internal';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+  Renderer2
+} from '@angular/core';
+import { FuiTransition, Transition, TransitionController, TransitionDirection } from '../../transition/internal';
 
 @Component({
   selector: 'fui-dimmer',
   template: `
-<div [class.content]="wrapContent">
-    <ng-content></ng-content>
-</div>
-`,
+    <div [class.content]="wrapContent">
+      <ng-content></ng-content>
+    </div>
+  `,
   styles: [`
-:host.dimmer:not(.hidden) {
-    transition: none;
-    display: flex !important;
-}
-`]
+    :host.dimmer:not(.hidden) {
+      transition: none;
+      display: flex !important;
+    }
+  `],
+  standalone: false,
 })
 export class FuiDimmer extends FuiTransition {
 

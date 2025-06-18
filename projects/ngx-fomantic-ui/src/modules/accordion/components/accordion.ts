@@ -1,23 +1,24 @@
-import {AfterContentInit, Component, ContentChildren, HostBinding, Input, QueryList} from '@angular/core';
-import {FuiAccordionPanel} from './accordion-panel';
-import {FuiAccordionService} from '../services/accordion.service';
+import { AfterContentInit, Component, ContentChildren, HostBinding, Input, QueryList } from '@angular/core';
+import { FuiAccordionPanel } from './accordion-panel';
+import { FuiAccordionService } from '../services/accordion.service';
 
 @Component({
   selector: 'fui-accordion',
   template: `
-<ng-content></ng-content>
-`,
+    <ng-content></ng-content>
+  `,
+  standalone: true,
   styles: [`
-/* Fix for general styling issues */
-:host {
-    display: block;
-}
+    /* Fix for general styling issues */
+    :host {
+      display: block;
+    }
 
-/* Fix for styled border issue */
-:host.styled fui-accordion-panel:first-child .title {
-    border-top: none
-}
-`]
+    /* Fix for styled border issue */
+    :host.styled fui-accordion-panel:first-child .title {
+      border-top: none
+    }
+  `]
 })
 export class FuiAccordion implements AfterContentInit {
   @HostBinding('class.ui')

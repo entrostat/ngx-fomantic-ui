@@ -8,7 +8,8 @@ const templateRef = TemplateRef;
 
 @Directive({
   selector: '[fuiPopup]',
-  exportAs: 'fuiPopup'
+  exportAs: 'fuiPopup',
+  standalone: false
 })
 export class FuiPopupDirective<T> extends FuiPopupTemplateController<T> {
   constructor(renderer: Renderer2,

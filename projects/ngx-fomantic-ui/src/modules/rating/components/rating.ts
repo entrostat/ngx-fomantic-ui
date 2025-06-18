@@ -1,15 +1,18 @@
-import {Component, Directive, EventEmitter, HostBinding, HostListener, Input, Output} from '@angular/core';
-import {CustomValueAccessor, customValueAccessorFactory, ICustomValueAccessorHost} from '../../../misc/util/internal';
+import { Component, Directive, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
+import { CustomValueAccessor, customValueAccessorFactory, ICustomValueAccessorHost } from '../../../misc/util/internal';
 
 @Component({
   selector: 'fui-rating',
   // tslint:disable-next-line
-  template: `<i *ngFor="let icon of icons; let i = index" class="icon {{type}}" (mouseover)="onMouseover(i)" (click)="onClick(i)" [class.selected]="hoveredIndex >= i && !isReadonly" [class.active]="value > i"></i>`,
+  template: `<i *ngFor="let icon of icons; let i = index" class="icon {{type}}" (mouseover)="onMouseover(i)"
+                (click)="onClick(i)" [class.selected]="hoveredIndex >= i && !isReadonly"
+                [class.active]="value > i"></i>`,
+  standalone: false,
   styles: [`
-:host.read-only .icon {
-    cursor: auto
-}
-`]
+    :host.read-only .icon {
+      cursor: auto
+    }
+  `]
 })
 export class FuiRating implements ICustomValueAccessorHost<number> {
 
@@ -86,7 +89,8 @@ export class FuiRating implements ICustomValueAccessorHost<number> {
 @Directive({
   selector: 'fui-rating',
   host: {'(valueChange)': 'onChange($event)'},
-  providers: [customValueAccessorFactory(FuiRatingValueAccessor)]
+  providers: [customValueAccessorFactory(FuiRatingValueAccessor)],
+  standalone: false
 })
 export class FuiRatingValueAccessor extends CustomValueAccessor<number, FuiRating> {
   constructor(host: FuiRating) {

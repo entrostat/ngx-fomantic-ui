@@ -11,11 +11,15 @@ import {
   TemplateRef,
   ViewChild
 } from '@angular/core';
-import {IFocusEvent, ITemplateRefContext, Util} from '../../../misc/util/internal';
-import {DropdownService, FuiDropdownMenu} from '../../dropdown/internal';
-import {ISearchLocaleValues, RecursivePartial, FuiLocalizationService} from '../../../behaviors/localization/internal';
-import {SearchService} from '../services/search.service';
-import {FilterFn, LookupFn} from '../helpers/lookup-fn';
+import { IFocusEvent, ITemplateRefContext, Util } from '../../../misc/util/internal';
+import { DropdownService, FuiDropdownMenu } from '../../dropdown/internal';
+import {
+  FuiLocalizationService,
+  ISearchLocaleValues,
+  RecursivePartial
+} from '../../../behaviors/localization/internal';
+import { SearchService } from '../services/search.service';
+import { FilterFn, LookupFn } from '../helpers/lookup-fn';
 
 export interface IResultContext<T> extends ITemplateRefContext<T> {
   query: string;
@@ -24,42 +28,43 @@ export interface IResultContext<T> extends ITemplateRefContext<T> {
 @Component({
   selector: 'fui-search',
   template: `
-<div class="ui input" [class.icon]="hasIcon" (click)="onClick($event)">
-    <input class="prompt" type="text" [attr.placeholder]="placeholder" autocomplete="off" [(ngModel)]="query">
-    <i *ngIf="hasIcon" class="search icon"></i>
-</div>
-<div class="results"
-     fuiDropdownMenu
-     [menuTransition]="transition"
-     [menuTransitionDuration]="transitionDuration"
-     menuSelectedItemClass="active">
+    <div class="ui input" [class.icon]="hasIcon" (click)="onClick($event)">
+      <input class="prompt" type="text" [attr.placeholder]="placeholder" autocomplete="off" [(ngModel)]="query">
+      <i *ngIf="hasIcon" class="search icon"></i>
+    </div>
+    <div class="results"
+         fuiDropdownMenu
+         [menuTransition]="transition"
+         [menuTransitionDuration]="transitionDuration"
+         menuSelectedItemClass="active">
 
-    <fui-search-result *ngFor="let r of results"
-                       class="item"
-                       [value]="r"
-                       [query]="query"
-                       [formatter]="resultFormatter"
-                       [template]="resultTemplate"
-                       (click)="select(r)"></fui-search-result>
+      <fui-search-result *ngFor="let r of results"
+                         class="item"
+                         [value]="r"
+                         [query]="query"
+                         [formatter]="resultFormatter"
+                         [template]="resultTemplate"
+                         (click)="select(r)"></fui-search-result>
 
-    <div *ngIf="results.length == 0" class="message empty">
+      <div *ngIf="results.length == 0" class="message empty">
         <div class="header">{{ localeValues.noResults.header }}</div>
         <div class="description">{{ localeValues.noResults.message }}</div>
+      </div>
     </div>
-</div>
-`,
+  `,
+  standalone: false,
   styles: [`
-/* Ensures results div has margin. */
-:host {
-    display: inline-block;
-    outline: 0;
-}
+    /* Ensures results div has margin. */
+    :host {
+      display: inline-block;
+      outline: 0;
+    }
 
-/* Fixes positioning when results are pushed above the search. */
-.results {
-    margin-bottom: .5em;
-}
-`]
+    /* Fixes positioning when results are pushed above the search. */
+    .results {
+      margin-bottom: .5em;
+    }
+  `]
 })
 export class FuiSearch<T> implements AfterViewInit {
 

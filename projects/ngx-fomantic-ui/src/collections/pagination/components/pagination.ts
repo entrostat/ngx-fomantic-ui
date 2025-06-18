@@ -31,6 +31,7 @@ import {Component, EventEmitter, HostBinding, Input, OnChanges, Output} from '@a
     <span><i class="angle double right icon"></i></span>
 </a>
 `,
+  standalone: false,
   styles: [`
 :host .item {
     transition: none;

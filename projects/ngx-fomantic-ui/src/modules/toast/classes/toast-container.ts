@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {FuiToastConfig} from './toast-config';
+import { Component } from '@angular/core';
+import { FuiToastConfig } from './toast-config';
 
 @Component({
   selector: 'fui-toast-container',
@@ -16,7 +16,8 @@ import {FuiToastConfig} from './toast-config';
                [closeIcon]="toast.closeIcon"
                [progressUp]="toast.progressUp"
                [className]="toast.className"
-               (close)="closeToast(toast.id)"></fui-toast>`
+               (close)="closeToast(toast.id)"></fui-toast>`,
+  standalone: false,
 })
 export class FuiToastContainer {
   toastData: Array<FuiToastConfig> = [];

@@ -10,21 +10,25 @@ import {MessageController} from '../classes/message-controller';
   template: `
 <div #containerSibling></div>
 `,
+  standalone: true,
   styles: [`
-:host {
-    display: block;
-}
-:host >>> fui-message {
-    display: block;
-    margin-bottom: 1rem;
-}
-:host >>> fui-message:last-of-type {
-    margin-bottom: 0;
-}
-:host >>> fui-message {
-    cursor: pointer;
-}
-`]
+    :host {
+      display: block;
+    }
+
+    :host >>> fui-message {
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    :host >>> fui-message:last-of-type {
+      margin-bottom: 0;
+    }
+
+    :host >>> fui-message {
+      cursor: pointer;
+    }
+  `]
 })
 export class FuiMessageContainer {
   @ViewChild('containerSibling', { read: ViewContainerRef })

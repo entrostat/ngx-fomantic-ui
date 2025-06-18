@@ -1,7 +1,14 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Transition, TransitionController, TransitionDirection} from '../../../modules/transition/internal';
-import {HandledEvent, IDynamicClasses} from '../../../misc/util/internal';
-import {MessageConfig, MessageState} from '../classes/message-config';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  FuiTransitionModule,
+  Transition,
+  TransitionController,
+  TransitionDirection
+} from '../../../modules/transition/internal';
+import { HandledEvent, IDynamicClasses } from '../../../misc/util/internal';
+import { MessageConfig, MessageState } from '../classes/message-config';
+import { FuiProgressModule } from '../../../modules/progress/internal';
+import { NgClass, NgIf } from '@angular/common';
 
 export interface IMessage {
   dismiss(): void;
@@ -9,29 +16,31 @@ export interface IMessage {
 
 @Component({
   selector: 'fui-message',
+  imports: [FuiProgressModule, FuiTransitionModule, NgIf, NgClass],
+  standalone: true,
   template: `
-<div [fuiTransition]="transitionController">
-    <div class="ui message"
-         [ngClass]="dynamicClasses"
-         (mousemove)="cancelTimer()"
-         (mouseleave)="beginTimer(extendedTimeout)"
-         (click)="onClicked($event)">
+    <div [fuiTransition]="transitionController">
+      <div class="ui message"
+           [ngClass]="dynamicClasses"
+           (mousemove)="cancelTimer()"
+           (mouseleave)="beginTimer(extendedTimeout)"
+           (click)="onClicked($event)">
         <i class="close icon" *ngIf="hasDismissButton" (click)="onDismissClicked($event)"></i>
         <ng-content></ng-content>
         <ng-container *ngIf="isDynamic">
-            <div class="header" *ngIf="header">{{ header }}</div>
-            <p>{{ text }}</p>
+          <div class="header" *ngIf="header">{{ header }}</div>
+          <p>{{ text }}</p>
         </ng-container>
+      </div>
+      <fui-progress *ngIf="isDynamic && hasProgress"
+                    class="bottom attached"
+                    [value]="timeoutProgress"
+                    [autoSuccess]="false"
+                    transition="linear"
+                    [transitionDuration]="currentTimeout"
+                    [canCompletelyEmpty]="true"></fui-progress>
     </div>
-    <fui-progress *ngIf="isDynamic && hasProgress"
-                  class="bottom attached"
-                  [value]="timeoutProgress"
-                  [autoSuccess]="false"
-                  transition="linear"
-                  [transitionDuration]="currentTimeout"
-                  [canCompletelyEmpty]="true"></fui-progress>
-</div>
-`
+  `
 })
 export class FuiMessage implements IMessage {
   public isDynamic: boolean;

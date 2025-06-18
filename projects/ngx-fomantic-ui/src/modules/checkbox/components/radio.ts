@@ -1,21 +1,32 @@
-import {Component, Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output, ViewChild} from '@angular/core';
-import {CustomValueAccessor, customValueAccessorFactory, ICustomValueAccessorHost} from '../../../misc/util/internal';
+import {
+  Component,
+  Directive,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+  ViewChild
+} from '@angular/core';
+import { CustomValueAccessor, customValueAccessorFactory, ICustomValueAccessorHost } from '../../../misc/util/internal';
 
 @Component({
   selector: 'fui-radio-button',
   template: `
-<input class="hidden"
-       type="checkbox"
-       [attr.name]="name"
-       [attr.checked]="checkedAttribute"
-       [attr.disabled]="isDisabledAttribute"
-       [ngModel]="isChecked"
-       (ngModel)="currentValue = value"
-       #radio>
-<label>
-    <ng-content></ng-content>
-</label>
-`
+    <input class="hidden"
+           type="checkbox"
+           [attr.name]="name"
+           [attr.checked]="checkedAttribute"
+           [attr.disabled]="isDisabledAttribute"
+           [ngModel]="isChecked"
+           (ngModel)="currentValue = value"
+           #radio>
+    <label>
+      <ng-content></ng-content>
+    </label>
+  `,
+  standalone: false
 })
 export class FuiRadio<T> implements ICustomValueAccessorHost<T> {
   @HostBinding('class.ui')
@@ -109,7 +120,8 @@ export class FuiRadio<T> implements ICustomValueAccessorHost<T> {
     '(currentValueChange)': 'onChange($event)',
     '(touched)': 'onTouched()'
   },
-  providers: [customValueAccessorFactory(FuiRadioValueAccessor)]
+  providers: [customValueAccessorFactory(FuiRadioValueAccessor)],
+  standalone: false
 })
 export class FuiRadioValueAccessor<T> extends CustomValueAccessor<T, FuiRadio<T>> {
   constructor(host: FuiRadio<T>) {
