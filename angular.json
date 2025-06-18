@@ -55,13 +55,16 @@
       },
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "aot": true,
-            "outputPath": "dist/ngx-fomantic-ui-docs",
+            "outputPath": {
+              "base": "dist/ngx-fomantic-ui-docs"
+            },
             "index": "projects/ngx-fomantic-ui-docs/src/index.html",
-            "main": "projects/ngx-fomantic-ui-docs/src/main.ts",
-            "polyfills": "projects/ngx-fomantic-ui-docs/src/polyfills.ts",
+            "polyfills": [
+              "projects/ngx-fomantic-ui-docs/src/polyfills.ts"
+            ],
             "tsConfig": "projects/ngx-fomantic-ui-docs/tsconfig.app.json",
             "assets": [
               "projects/ngx-fomantic-ui-docs/src/favicon.ico",
@@ -70,7 +73,8 @@
             "styles": [
               "projects/ngx-fomantic-ui-docs/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "browser": "projects/ngx-fomantic-ui-docs/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -86,8 +90,6 @@
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
