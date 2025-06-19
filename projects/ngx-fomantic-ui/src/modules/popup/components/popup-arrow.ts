@@ -4,10 +4,14 @@ import { PositioningPlacement } from '../../../misc/util/internal';
 @Component({
   selector: 'fui-popup-arrow',
   template: `
-    <div class="dynamic arrow" [attr.direction]="direction" *ngIf="alignment == 'center'"></div>
-    <div class="static arrow" [attr.direction]="direction" [attr.alignment]="alignment"
-         *ngIf="alignment != 'center'"></div>
-  `,
+    @if (alignment == 'center') {
+      <div class="dynamic arrow" [attr.direction]="direction"></div>
+    }
+    @if (alignment != 'center') {
+      <div class="static arrow" [attr.direction]="direction" [attr.alignment]="alignment"
+      ></div>
+    }
+    `,
   styles: [`
     .arrow {
       position: absolute;

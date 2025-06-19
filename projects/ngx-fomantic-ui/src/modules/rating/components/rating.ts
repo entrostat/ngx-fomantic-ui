@@ -4,9 +4,11 @@ import { CustomValueAccessor, customValueAccessorFactory, ICustomValueAccessorHo
 @Component({
   selector: 'fui-rating',
   // tslint:disable-next-line
-  template: `<i *ngFor="let icon of icons; let i = index" class="icon {{type}}" (mouseover)="onMouseover(i)"
-                (click)="onClick(i)" [class.selected]="hoveredIndex >= i && !isReadonly"
-                [class.active]="value > i"></i>`,
+  template: `@for (icon of icons; track icon; let i = $index) {
+  <i class="icon {{type}}" (mouseover)="onMouseover(i)"
+    (click)="onClick(i)" [class.selected]="hoveredIndex >= i && !isReadonly"
+  [class.active]="value > i"></i>
+}`,
   standalone: false,
   styles: [`
     :host.read-only .icon {

@@ -1,37 +1,37 @@
-import {Component, ElementRef, Input, ViewChild, ViewContainerRef} from '@angular/core';
-import {MessageConfig} from '../classes/message-config';
-import {ActiveMessage, FuiActiveMessage} from '../classes/active-message';
-import {FuiMessage} from './message';
-import {FuiComponentFactory} from '../../../misc/util/internal';
-import {MessageController} from '../classes/message-controller';
+import { Component, ElementRef, Input, ViewChild, ViewContainerRef } from '@angular/core';
+import { MessageConfig } from '../classes/message-config';
+import { ActiveMessage, FuiActiveMessage } from '../classes/active-message';
+import { FuiMessage } from './message';
+import { FuiComponentFactory } from '../../../misc/util/internal';
+import { MessageController } from '../classes/message-controller';
 
 @Component({
   selector: 'fui-message-container',
   template: `
-<div #containerSibling></div>
-`,
+    <div #containerSibling></div>
+  `,
   standalone: true,
   styles: [`
     :host {
       display: block;
     }
 
-    :host >>> fui-message {
+    :host ::ng-deep fui-message {
       display: block;
       margin-bottom: 1rem;
     }
 
-    :host >>> fui-message:last-of-type {
+    :host ::ng-deep fui-message:last-of-type {
       margin-bottom: 0;
     }
 
-    :host >>> fui-message {
+    :host ::ng-deep fui-message {
       cursor: pointer;
     }
   `]
 })
 export class FuiMessageContainer {
-  @ViewChild('containerSibling', { read: ViewContainerRef })
+  @ViewChild('containerSibling', {read: ViewContainerRef})
   public containerSibling: ViewContainerRef;
   private _messages: ActiveMessage[];
   private _queue: ActiveMessage[];

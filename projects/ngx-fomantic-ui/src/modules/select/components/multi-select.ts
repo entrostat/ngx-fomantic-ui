@@ -14,48 +14,57 @@ import { FuiSelectOption } from './select-option';
   template: `
     <!-- Dropdown icon -->
     <i class="{{ icon }} icon" (click)="onCaretClick($event)"></i>
-
-    <ng-container *ngIf="hasLabels">
+    
+    @if (hasLabels) {
       <!-- Multi-select labels -->
-      <fui-multi-select-label *ngFor="let selected of selectedOptions;"
-                              [value]="selected"
-                              [query]="query"
-                              [formatter]="configuredFormatter"
-                              [template]="optionTemplate"
-                              (deselected)="deselectOption($event)"></fui-multi-select-label>
-    </ng-container>
-
+      @for (selected of selectedOptions; track selected) {
+        <fui-multi-select-label
+          [value]="selected"
+          [query]="query"
+          [formatter]="configuredFormatter"
+          [template]="optionTemplate"
+        (deselected)="deselectOption($event)"></fui-multi-select-label>
+      }
+    }
+    
     <!-- Query input -->
     <input fuiSelectSearch
-           type="text"
-           [hidden]="!isSearchable || isSearchExternal">
-
+      type="text"
+      [hidden]="!isSearchable || isSearchExternal">
+    
     <!-- Helper text -->
     <div class="text"
-         [class.default]="hasLabels"
-         [class.filtered]="!!query && !isSearchExternal">
-
+      [class.default]="hasLabels"
+      [class.filtered]="!!query && !isSearchExternal">
+    
       <!-- Placeholder text -->
-      <ng-container *ngIf="hasLabels; else selectedBlock">{{ placeholder }}</ng-container>
-
+      @if (hasLabels) {
+        {{ placeholder }}
+      } @else {
+        {{ selectedMessage }}
+      }
+    
       <!-- Summary shown when labels are hidden -->
-      <ng-template #selectedBlock> {{ selectedMessage }}</ng-template>
     </div>
-
+    
     <!-- Select dropdown menu -->
     <div class="menu"
-         fuiDropdownMenu
-         [menuTransition]="transition"
-         [menuTransitionDuration]="transitionDuration"
-         [menuAutoSelectFirst]="true">
-
+      fuiDropdownMenu
+      [menuTransition]="transition"
+      [menuTransitionDuration]="transitionDuration"
+      [menuAutoSelectFirst]="true">
+    
       <ng-content></ng-content>
-      <ng-container *ngIf="availableOptions.length == 0 ">
-        <div *ngIf="!maxSelectedReached" class="message">{{ localeValues.noResultsMessage }}</div>
-        <div *ngIf="maxSelectedReached" class="message">{{ maxSelectedMessage }}</div>
-      </ng-container>
+      @if (availableOptions.length == 0 ) {
+        @if (!maxSelectedReached) {
+          <div class="message">{{ localeValues.noResultsMessage }}</div>
+        }
+        @if (maxSelectedReached) {
+          <div class="message">{{ maxSelectedMessage }}</div>
+        }
+      }
     </div>
-  `,
+    `,
   standalone: false,
   styles: [`
     :host input.search {

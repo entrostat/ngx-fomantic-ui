@@ -1,4 +1,4 @@
-import { Component, ContentChild, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ContentChild, ElementRef, Input, OnInit, output } from '@angular/core';
 import { FuiToastTitle } from '../directives/toast-title';
 import { FuiToastMessage } from '../directives/toast-message';
 
@@ -6,35 +6,47 @@ import { FuiToastMessage } from '../directives/toast-message';
   selector: 'fui-toast',
   exportAs: 'fuiToast',
   template: `
-    <div class="toast-box compact" (click)="(dismissible ? (!closeIcon ? close() : null) : null)">
-      <div *ngIf="showProgress && showProgress === 'top'"
-           class="ui attached active progress {{class}} {{showProgress}}">
-        <div class="bar" [ngStyle]="{'transition': 'width ' + (displayTime / 1000)  + 's', 'width': progress + '%'}"
-             style="width: 100%;"></div>
-      </div>
+    <div class="toast-box compact" (click)="(dismissible ? (!closeIcon ? onClose() : null) : null)">
+      @if (showProgress && showProgress === 'top') {
+        <div
+          class="ui attached active progress {{class}} {{showProgress}}">
+          <div class="bar" [ngStyle]="{'transition': 'width ' + (displayTime / 1000)  + 's', 'width': progress + '%'}"
+               style="width: 100%;"></div>
+        </div>
+      }
       <div class="{{class}} {{className}}" [ngClass]="{'icon': showIcon}">
-        <i *ngIf="closeIcon" class="close icon" (click)="close()"></i>
-        <i *ngIf="showIcon" class="{{showIcon}} icon"></i>
+        @if (closeIcon) {
+          <i class="close icon" (click)="onClose()"></i>
+        }
+        @if (showIcon) {
+          <i class="{{showIcon}} icon"></i>
+        }
         <div class="content">
-          <ng-container *ngIf="title">
+          @if (title) {
             <div class="header">{{ title }}</div>
-          </ng-container>
-          <div class="header" *ngIf="titleTpl">
-            <ng-template [ngTemplateOutlet]="titleTpl.templateRef"></ng-template>
-          </div>
-          <ng-container *ngIf="message">
+          }
+          @if (titleTpl) {
+            <div class="header">
+              <ng-template [ngTemplateOutlet]="titleTpl.templateRef"></ng-template>
+            </div>
+          }
+          @if (message) {
             <div class="body">{{ message }}</div>
-          </ng-container>
-          <div *ngIf="messageTpl" class="body">
-            <ng-template [ngTemplateOutlet]="messageTpl.templateRef"></ng-template>
-          </div>
+          }
+          @if (messageTpl) {
+            <div class="body">
+              <ng-template [ngTemplateOutlet]="messageTpl.templateRef"></ng-template>
+            </div>
+          }
         </div>
       </div>
-      <div *ngIf="showProgress && showProgress === 'bottom'"
-           class="ui attached active progress {{class}} {{showProgress}}">
-        <div class="bar" [ngStyle]="{'transition': 'width ' + (displayTime / 1000)  + 's', 'width': progress + '%'}"
-             style="width: 100%;"></div>
-      </div>
+      @if (showProgress && showProgress === 'bottom') {
+        <div
+          class="ui attached active progress {{class}} {{showProgress}}">
+          <div class="bar" [ngStyle]="{'transition': 'width ' + (displayTime / 1000)  + 's', 'width': progress + '%'}"
+               style="width: 100%;"></div>
+        </div>
+      }
     </div>
   `,
   standalone: false,
@@ -55,7 +67,7 @@ export class FuiToast implements OnInit {
 
   @Input() id: number;
 
-  @Output('close') closeEvent = new EventEmitter();
+  close = output<number>();
 
   @ContentChild(FuiToastTitle) titleTpl: FuiToastTitle;
   @ContentChild(FuiToastMessage) messageTpl: FuiToastMessage;
@@ -93,7 +105,7 @@ export class FuiToast implements OnInit {
     this.displayTime = this.displayTime || 0;
 
     if (this.displayTime) {
-      window.setTimeout(() => this.close(), this.displayTime);
+      window.setTimeout(() => this.onClose(), this.displayTime);
 
       if (this.showProgress) {
         this.progress = this.progressUp ? 0 : 100;
@@ -102,8 +114,8 @@ export class FuiToast implements OnInit {
     }
   }
 
-  close() {
+  onClose() {
     this.elementRef.nativeElement.remove();
-    this.closeEvent.next(this.id);
+    this.close.emit(this.id);
   }
 }
