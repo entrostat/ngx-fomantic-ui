@@ -30,7 +30,7 @@ export class CalendarRangeHourService extends CalendarRangeService {
         </thead>
       }
       <tbody>
-        @for (group of ranges.current.groupedItems; track group) {
+        @for (group of ranges.current.groupedItems; track generateGroupKey(group)) {
           <tr>
             @for (item of group; track item.humanReadable) {
               <td class="link"
