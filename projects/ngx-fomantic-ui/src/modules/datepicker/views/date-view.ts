@@ -32,7 +32,7 @@ export class CalendarRangeDateService extends CalendarRangeService {
         </th>
       </tr>
       <tr>
-        @for (day of days; track day) {
+        @for (day of days; track day + '-' + i; let i = $index) {
           <th>{{ day }}</th>
         }
       </tr>
