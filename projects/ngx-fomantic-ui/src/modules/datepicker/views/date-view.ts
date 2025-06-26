@@ -24,33 +24,33 @@ export class CalendarRangeDateService extends CalendarRangeService {
   template: `
     <table class="ui celled center aligned unstackable table seven column day">
       <thead>
-        <tr>
-          <th colspan="7">
-            <fui-calendar-view-title [ranges]="ranges" (zoomOut)="zoomOut()">
-              {{ date }}
-            </fui-calendar-view-title>
-          </th>
-        </tr>
-        <tr>
-          @for (day of days; track day) {
-            <th>{{ day }}</th>
-          }
-        </tr>
+      <tr>
+        <th colspan="7">
+          <fui-calendar-view-title [ranges]="ranges" (zoomOut)="zoomOut()">
+            {{ date }}
+          </fui-calendar-view-title>
+        </th>
+      </tr>
+      <tr>
+        @for (day of days; track day) {
+          <th>{{ day }}</th>
+        }
+      </tr>
       </thead>
       <tbody>
         @for (group of ranges.current.groupedItems; track group) {
           <tr>
-            @for (item of group; track item) {
+            @for (item of group; track item.humanReadable) {
               <td class="link"
-                [calendarItem]="item"
-                (click)="setDate(item)">{{ item.humanReadable }}
+                  [calendarItem]="item"
+                  (click)="setDate(item)">{{ item.humanReadable }}
               </td>
             }
           </tr>
         }
       </tbody>
     </table>
-    `,
+  `,
   standalone: false,
 })
 export class FuiCalendarDateView extends CalendarView {

@@ -20,29 +20,29 @@ export class CalendarRangeHourService extends CalendarRangeService {
     <table class="ui celled center aligned unstackable table four column hour">
       @if (service.config.mode != 1) {
         <thead>
-          <tr>
-            <th colspan="4">
-              <fui-calendar-view-title [ranges]="ranges" (zoomOut)="zoomOut()">
-                {{ date }}
-              </fui-calendar-view-title>
-            </th>
-          </tr>
+        <tr>
+          <th colspan="4">
+            <fui-calendar-view-title [ranges]="ranges" (zoomOut)="zoomOut()">
+              {{ date }}
+            </fui-calendar-view-title>
+          </th>
+        </tr>
         </thead>
       }
       <tbody>
         @for (group of ranges.current.groupedItems; track group) {
           <tr>
-            @for (item of group; track item) {
+            @for (item of group; track item.humanReadable) {
               <td class="link"
-                [calendarItem]="item"
-                (click)="setDate(item)">{{ item.humanReadable }}
+                  [calendarItem]="item"
+                  (click)="setDate(item)">{{ item.humanReadable }}
               </td>
             }
           </tr>
         }
       </tbody>
     </table>
-    `,
+  `,
   standalone: false,
 })
 export class FuiCalendarHourView extends CalendarView {

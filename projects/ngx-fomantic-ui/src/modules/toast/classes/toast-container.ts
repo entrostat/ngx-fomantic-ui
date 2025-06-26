@@ -5,7 +5,7 @@ import { FuiToastConfig } from './toast-config';
   selector: 'fui-toast-container',
   exportAs: 'fuiToastContainer',
   template: `
-    @for (toast of toastData; track toast) {
+    @for (toast of toastData; track toast.id) {
       <fui-toast
         [id]="toast.id"
         [title]="toast.title"
@@ -17,7 +17,7 @@ import { FuiToastConfig } from './toast-config';
         [closeIcon]="toast.closeIcon"
         [progressUp]="toast.progressUp"
         [className]="toast.className"
-      (close)="closeToast(toast.id)"></fui-toast>
+        (close)="closeToast(toast.id)"></fui-toast>
     }`,
   standalone: false,
 })

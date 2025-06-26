@@ -38,7 +38,8 @@
     <demo-codeblock language="typescript" [src]="customizationCode"></demo-codeblock>
   </div>
 
-  <p>The 2nd argument of <code>load</code> & <code>patch</code> takes a partial (all optional) <code>ILocaleValues</code> object, defined below.</p>
+  <p>The 2nd argument of <code>load</code> & <code>patch</code> takes a partial (all optional)
+    <code>ILocaleValues</code> object, defined below.</p>
   <div class="ui segment">
     <demo-codeblock language="typescript" [src]="valuesInterface"></demo-codeblock>
   </div>
@@ -46,10 +47,11 @@
   <h2 class="ui dividing header">Built in Languages</h2>
   <p>Below is a list of all languages supported out of the box.</p>
 
-  <p>Your language isn't there? <a href="https://github.com/ngx-fomantic-ui/ngx-fomantic-ui/pulls">Submit a pull request</a> with your translations.</p>
+  <p>Your language isn't there? <a href="https://github.com/ngx-fomantic-ui/ngx-fomantic-ui/pulls">Submit a pull
+    request</a> with your translations.</p>
 
   <ul class="ui list">
-    @for (lang of supportedLanguages; track lang) {
+    @for (lang of supportedLanguages; track lang.code) {
       <li class="item">
         <div class="header">
           {{ lang.name }}&nbsp;
@@ -62,7 +64,7 @@
         }
         @if (lang.children) {
           <ul>
-            @for (child of lang.children; track child) {
+            @for (child of lang.children; track child.code) {
               <li class="item">
                 <div class="header">
                   {{ child.name }}&nbsp;

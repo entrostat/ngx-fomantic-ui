@@ -16,28 +16,28 @@ export class CalendarRangeYearService extends CalendarRangeService {
   template: `
     <table class="ui celled center aligned unstackable table three column year">
       <thead>
-        <tr>
-          <th colspan="3">
-            <fui-calendar-view-title [ranges]="ranges" (zoomOut)="zoomOut()">
-              {{ pad(decadeStart) }} - {{ pad(decadeStart + 10) }}
-            </fui-calendar-view-title>
-          </th>
-        </tr>
+      <tr>
+        <th colspan="3">
+          <fui-calendar-view-title [ranges]="ranges" (zoomOut)="zoomOut()">
+            {{ pad(decadeStart) }} - {{ pad(decadeStart + 10) }}
+          </fui-calendar-view-title>
+        </th>
+      </tr>
       </thead>
       <tbody>
         @for (group of ranges.current.groupedItems; track group) {
           <tr>
-            @for (item of group; track item) {
+            @for (item of group; track item.humanReadable) {
               <td class="link"
-                [calendarItem]="item"
-                (click)="setDate(item)">{{ item.humanReadable }}
+                  [calendarItem]="item"
+                  (click)="setDate(item)">{{ item.humanReadable }}
               </td>
             }
           </tr>
         }
       </tbody>
     </table>
-    `,
+  `,
   standalone: false
 })
 export class FuiCalendarYearView extends CalendarView {

@@ -1,4 +1,4 @@
-@for (object of api; track object) {
+@for (object of api; track object.selector) {
   <div class="api-object">
     <h3 class="ui header">{{ object.selector }}</h3>
     <div class="ui segments">
@@ -14,9 +14,12 @@
                 <div class="content">
                   <div class="header">
                     <code>{{ property.name }}</code>&nbsp;
-                    <div class="ui grey medium horizontal label" fuiPopup popupText="Data Type">{{ property.type }}</div>
+                    <div class="ui grey medium horizontal label" fuiPopup popupText="Data Type">{{ property.type }}
+                    </div>
                     @if (property.defaultValue) {
-                      <div class="ui teal medium horizontal label" fuiPopup popupText="Default Value">{{ property.defaultValue }}</div>
+                      <div class="ui teal medium horizontal label" fuiPopup
+                           popupText="Default Value">{{ property.defaultValue }}
+                      </div>
                     }
                     @if (property.required) {
                       <div class="ui red medium horizontal label">required</div>
