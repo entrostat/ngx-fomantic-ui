@@ -175,10 +175,10 @@
     semver "7.7.2"
     yargs "17.7.2"
 
-"@angular/common@^20.0.4":
-  version "20.0.4"
-  resolved "https://registry.yarnpkg.com/@angular/common/-/common-20.0.4.tgz#845ce1673ff6773f39f0ead5f4da876cbfe07619"
-  integrity sha512-fWgxe2rgSKgI36ummBYnBN4YUrmp4CHbfEG3RMeJho/vhHKguk2/o6BgL9zvnKybvbWmuaqbkHogi+y0LeJ8Ww==
+"@angular/common@^20.3.28":
+  version "20.3.28"
+  resolved "https://registry.yarnpkg.com/@angular/common/-/common-20.3.28.tgz#c3b639fe112b62498913cdca8b82330d469df8ef"
+  integrity sha512-vvMrBI0POHYeUE8EnN4ohYOqLkmZXI6oKJnMvarfukySnw7mZ4VuY4DNAnRSbEZEqO55sOmVCQ7jbxDDt34tZw==
   dependencies:
     tslib "^2.3.0"
 
